@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>通信エラーが発生しました</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            color: red;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>サーバーとの通信が切断されました</h1>
+        <p>通信環境が良好であるかをご確認ください。</p>
+        <button onclick="retryConnection()">🔄 再接続</button>
+    </div>
+
+    <script>
+        function retryConnection() {
+            window.location.href = "/"; // 元のページに戻る
+        }
+    </script>
+</body>
+</html>
