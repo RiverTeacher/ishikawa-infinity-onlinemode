@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>石川 infinity</title>
+  <link rel="stylesheet" href="./style.css">
+  <meta name="robots" content="noindex">
+</head>
+<body oncontextmenu="return false">
+
+<!-- partial:index.partial.html -->
+<!-- 増殖用の画像 -->
+<div class="original">
+  <div class="original__item">
+    <img src="isikawa.png">
+  </div>
+  <div class="original__item">
+    <img src="isikawa.png">
+  </div>
+  <div class="original__item">
+    <img src="isikawa.png">
+  </div>
+  <div class="original__item">
+    <img src="isikawa.png">
+  </div>
+</div>
+
+<!-- 増殖する場所 -->
+<div class="wrapper" id="js-wrapper">
+</div>
+
+<!-- 増殖するボタン -->
+<div class="btn" id="js-btn">増殖</div>
+<!-- 表示する回数 -->
+<!-- partial -->
+<script>
+// クッキーから回数を取得する関数
+function getClickCountFromCookie() {
+  const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)clickCount\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  return cookieValue ? parseInt(cookieValue) : 0;
+}
+
+// クッキーに回数を保存する関数
+function setClickCountToCookie(count) {
+  // クッキーの有効期限を1年後に設定
+  const expires = new Date();
+  expires.setFullYear(expires.getFullYear() + 1);
+  
+  // クッキーのパスをルートに設定
+  const path = "/";
+  
+  // クッキーに値を設定
+  document.cookie = "clickCount=" + count + ";expires=" + expires.toUTCString() + ";path=" + path;
+}
+
+// ページ読み込み時にクッキーから回数を取得して表示する
+window.onload = function() {
+  let clickCount = getClickCountFromCookie();
+  document.getElementById('js-btn').textContent = "増殖 (" + clickCount + "体)";
+}
+
+// ボタンをクリックしたときの処理
+document.getElementById('js-btn').addEventListener('click', function() {
+  let clickCount = getClickCountFromCookie() + 1;
+  // クッキーに回数を保存
+  setClickCountToCookie(clickCount);
+  // ボタンのテキストを更新
+  document.getElementById('js-btn').textContent = "増殖 (" + clickCount + "体)";
+});
+
+</script>
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

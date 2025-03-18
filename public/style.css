@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/*コピー元として使うだけなので、display:noneして、非表示にしている*/
+.original {
+  display: none;
+}
+
+/*増殖用の画像*/
+.original__item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -75px;
+  margin-top: -75px;
+  width: 150px;
+  height: 150px;
+}
+.original__item img {
+  width: 100%;
+  height: 100%;
+}
+
+/*増殖する場所*/
+.wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/*増殖するボタン*/
+.btn {
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: #333;
+  border-radius: 100%;
+  font-family: "Arial";
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+}
+html {
+  touch-action: manipulation;
+}
