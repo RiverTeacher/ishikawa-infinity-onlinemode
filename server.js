@@ -6,24 +6,39 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.use(express.static(__dirname + '/public')); // HTML, CSS, JSを公開
+app.use(express.static(__dirname + '/public')); // 静的ファイルを提供
 
-let clones = []; // 現在のクローン状態を管理
+let clones = []; // 現在のクローンデータを管理
+let users = {};  // 接続ユーザーを管理
 
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    // 現在のクローン状態を新規接続者に送る
+    // ユーザーIDを作成
+    let userId = "user" + Math.floor(Math.random() * 1000);
+    users[socket.id] = userId;
+
+    // 参加通知を全員に送信
+    io.emit('chatMessage', { user: "システム", message: `${userId} が参加しました。` });
+
+    // 既存のクローン情報を新規接続ユーザーに送信
     socket.emit('sync', clones);
 
-    // クローンが増えたら全員に送信
+    // 新しいクローンを受信して全員に送信
     socket.on('newClone', (data) => {
         clones.push(data);
         io.emit('newClone', data);
     });
 
+    // チャットメッセージの受信
+    socket.on('chatMessage', (message) => {
+        io.emit('chatMessage', { user: users[socket.id], message });
+    });
+
+    // ユーザー切断時の処理
     socket.on('disconnect', () => {
-        console.log('A user disconnected');
+        io.emit('chatMessage', { user: "システム", message: `${users[socket.id]} が退出しました。` });
+        delete users[socket.id];
     });
 });
 

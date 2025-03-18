@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>石川 infinity</title>
-  <link rel="stylesheet" href="./style.css">
-  <meta name="robots" content="noindex">
+    <meta charset="UTF-8">
+    <title>石川 infinity</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body oncontextmenu="return false">
 
+<!-- ロード画面 -->
+<div id="loading-screen">
+    <div class="loading-text">既存のデータを受信中です…</div>
+</div>
+
 <!-- 増殖用の画像 -->
 <div class="original">
-  <div class="original__item">
-    <img src="isikawa.png">
-  </div>
+    <div class="original__item">
+        <img src="isikawa.png">
+    </div>
 </div>
 
 <!-- 増殖する場所 -->
 <div class="wrapper" id="js-wrapper"></div>
 
-<!-- 増殖するボタン -->
+<!-- 増殖ボタン -->
 <div class="btn" id="js-btn">増殖</div>
 
-<!-- socket.ioを読み込む -->
+<button id="chat-toggle">チャットを開く</button>
+
+<div id="chat-box" class="chat-hidden">
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="メッセージを入力">
+    <button id="chat-send">送信</button>
+</div>
+
+
+
+<!-- 必要なスクリプト -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="./script.js"></script>
-
 
 </body>
 </html>
