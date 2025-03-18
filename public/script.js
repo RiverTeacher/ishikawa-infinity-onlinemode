@@ -11,10 +11,16 @@ var easingName = [
     'ease: Circ.easeInOut'
 ];
 
+// 新規接続時に過去のクローンを受け取り、再描画
+socket.on('sync', function(existingClones) {
+    existingClones.forEach(data => {
+        createClone(data);
+    });
+});
+
 $btn.addEventListener('click', function() {
     const randNum = Math.floor(Math.random() * $originalItem.length);
-    const $clone = $originalItem[randNum].cloneNode(true);
-    
+
     // 位置情報をランダムに生成
     var expandAnime = {
         x: Math.floor(Math.random() * window.innerWidth - window.innerWidth / 2),
@@ -25,14 +31,11 @@ $btn.addEventListener('click', function() {
         ease: easingName[Math.floor(Math.random() * easingName.length)]
     };
 
-    // クローンを作成して表示
-    createClone(expandAnime);
-
-    // サーバーに送信
+    // サーバーに送信 (自分の画面では何もしない)
     socket.emit('newClone', expandAnime);
 });
 
-// 他のクライアントからの増殖を受信
+// 他のクライアント (自分含む) からの増殖を受信
 socket.on('newClone', function(expandAnime) {
     createClone(expandAnime);
 });
