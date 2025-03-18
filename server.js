@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.use(express.static(__dirname + '/public')); // HTMLやCSS, JSを置く
+app.use(express.static(__dirname + '/public')); // HTML, CSS, JSを公開
 
 let clones = []; // 現在のクローン状態を管理
 
